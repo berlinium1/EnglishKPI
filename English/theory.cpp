@@ -19,13 +19,14 @@ bool Test::checkAnswer(char answer){
 bool Test::show_test(){
     cout<<task<<endl;
     char ch;
-    cout<<"Give the right answer: "; cin>>ch;
-    cout<<checkAnswer(ch)<<endl;
+    cout << "Give the right answer: "; cin >> ch;
+    if (!checkAnswer(ch)) cout << "Incorrect!" << endl;
     return checkAnswer(ch);
 }
 
 
 Theory::Theory(string path){
+    this->isAlreadyDone = false;
     ifstream source(path);
     if (source.is_open()) {
         string str, task;
@@ -70,18 +71,27 @@ Theory::Theory(string path){
                 tests.push_back(test);
             }
         } while (!source.eof());
-//            for (int i = 0; i < tests.size(); i++) {
-//                cout<<tests[i].task;
-//                cout<<tests[i].rightAnswer<<endl;
-//            }
+            /*for (int i = 0; i < tests.size(); i++) {
+                cout<<tests[i].task;
+                cout<<tests[i].rightAnswer<<endl;
+            }*/
         source.close();
     }
 }
 
-void Theory::show(){
-    system("cls");
-    cout << title << endl << theory << endl;
-    for (size_t i = 0; i < tests.size(); i++) {
-        tests[i].show_test();
+void Theory::show_theory(){
+    cout<<theory;
+}
+
+void Theory::show_tests(Profile &user){
+    float score = 0;
+    for (int i = 0; i < tests.size(); i++)
+        if (tests[i].show_test() == false)
+            isAlreadyDone = true;
+    if (isAlreadyDone) user.setScore(score);
+    else{
+        isAlreadyDone = true;
+        score = 1;
+        user.setScore(score);
     }
 }

@@ -15,7 +15,7 @@
 class Interface{
     vector<Profile> users;
 
-    bool userValidation(string name, int *index = nullptr){
+    bool userValidation(string name, int* index = nullptr){
         for (int i = 0; i < users.size(); i++)
         if (users[i].nickname == name){
             if (index != nullptr) *index = i;
@@ -69,18 +69,18 @@ class Interface{
         }
         userWorkLoop(user);
     }
-    bool authorize(Profile& temp){
+    bool authorize(int& index) {
         string inputName;
         string inputPassword;
-        int index;
-        cout<<"Enter your name: "; getline(cin.ignore(), inputName);
+        cout << "Enter your name: "; getline(cin.ignore(), inputName);
         if (!userValidation(inputName, &index)) {
-            cout<<"Enter your password: "; getline(cin, inputPassword);
-            cout<<"\nEntered password is: "<<inputPassword<<endl;
+            cout << "Enter your password: "; getline(cin, inputPassword);
+            cout << "\nEntered password is: " << inputPassword << endl;
             string tempName, tempPassword;
+            cout << "index = "<< index;
             users[index].getUserData(tempName, tempPassword);
             if (inputPassword == tempPassword) {
-                cout<<"Done! Your name and password are: "<<tempName<<" === "<<tempPassword<<endl;
+                cout << "Done! Your name and password are: " << tempName << " === " << tempPassword << endl;
                 return true;
             }
             else showaAlert("Password is wrong. Try again");
@@ -101,10 +101,17 @@ class Interface{
                     // here we operate levels
                     cout<<"Levels"<<endl;
                     
-                    parser.show_material_list();
+                    
+                    do
+                    {
+                        parser.show_material_list(user);
+                        cout << "Wonna more? (y/n) Choice: "; cin >> choice;
+                        cout << "score" << user.level << endl;
+                    } while (choice == 'y');
+                    
 
-                    flag = 1;
-                    break;
+                    flag = 1; break;
+
                 case '1':
                     start();
                     break;
@@ -123,8 +130,8 @@ public:
         cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
         users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
 
+        int index = -1;
         Profile temp;
-
         while(true)
         {
             bool flag = 0;
@@ -135,7 +142,7 @@ public:
                     flag = 1;
                     break;
                 case '1':
-                    if (authorize(temp)) userWorkLoop(temp);
+                    if (authorize(index)) userWorkLoop(temp);
                     flag = 1;
                     break;
                 default:

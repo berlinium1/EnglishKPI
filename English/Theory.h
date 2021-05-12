@@ -8,6 +8,7 @@
 #ifndef Theory_h
 #define Theory_h
 #include "Header.h"
+#include "Profile.h"
 
 class Test{
 public:
@@ -26,9 +27,11 @@ class Theory{
     string title;
     string theory;
     vector<Test> tests;
+    bool isAlreadyDone;
 public:
     Theory(string path);
-    void show();
+    void show_theory();
+    void show_tests(Profile &user);
 };
 
 

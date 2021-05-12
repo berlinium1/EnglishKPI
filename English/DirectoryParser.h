@@ -22,5 +22,5 @@ public:
 		parse();
 	}
 
-	void show_material_list();
+	void show_material_list(Profile& user);
 };

@@ -11,8 +11,9 @@ void DirectoryParser::parse() {
     }
 }
 
-void DirectoryParser::show_material_list() {
+void DirectoryParser::show_material_list(Profile& user) {
     int min = 0;
+    access_level = user.level;
     int max = access_level > materials.size() ? materials.size() : access_level;
     size_t num = 0;
     bool input = true;
@@ -41,7 +42,8 @@ void DirectoryParser::show_material_list() {
     }
     else {
         Theory lesson_instance(fs::current_path().string() + "\\Data\\" + materials[stoi(choice)]);
-        lesson_instance.show();
+        lesson_instance.show_theory();
+        lesson_instance.show_tests(user);
     }
 
 }
