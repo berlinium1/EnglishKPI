@@ -5,44 +5,16 @@
 //  Created by Берлинский Ярослав Владленович on 11.05.2021.
 //
 
-#include <iostream>
+#include "Header.h"
+#include "Theory.h"
+#include "Interface.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    //Test test("Task", 5, 1);
+    //test.show_test();
+    Theory theory("theory2.txt");
+    theory.show();
+    Interface app;
+    app.start();
     return 0;
 }
-
-
-// users
-
-/*
-#include <iostream>
-#include "profile.h"
-using namespace std;
-
-int main()
-{
-	string path = "users.txt";
-
-	vector<Profile> users = read_users(path);
-
-	for (int i = 0; i < 1; i++)
-	{
-		Profile temp;
-		cout << "nickname = "; cin >> temp.nickname;
-		cout << "score = "; cin >> temp.score;
-		cout << "level = "; cin >> temp.level;
-		cout << "===============================================" << endl;
-		write_user(path, users, temp);
-	}
-
-	cout << endl << endl;
-	for (int i = 0; i < users.size(); i++)
-	{
-		users[i].print();
-	}
-
-	system("pause");
-}
-*/
