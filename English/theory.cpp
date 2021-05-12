@@ -84,15 +84,15 @@ void Theory::show_theory(){
     cout<<theory;
 }
 
-float Theory::show_tests(int index){
+void Theory::show_tests(Profile &user){
     float score = 0;
     for (int i = 0; i < tests.size(); i++)
         if (tests[i].show_test() == false)
             isAlreadyDone = true;
-    if (isAlreadyDone) return 0;
+    if (isAlreadyDone) user.setScore(score);
     else{
         isAlreadyDone = true;
         score = 1;
+        user.setScore(score);
     }
-    return score;
 }
