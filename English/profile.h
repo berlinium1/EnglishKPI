@@ -5,7 +5,6 @@
 #include <fstream>
 using namespace std;
 
-//temp
 class User{
 public:
     string name;
@@ -24,14 +23,12 @@ struct Profile
     int level;
     
     //temp
-    Profile(){}
-    Profile(string nickname, string password){
+    void setUserData(string nickname, string password){
         this->user.name = nickname;
-        for (int i = 0; i <= nickname.size(); i++) this->nickname[i] = nickname.c_str()[i];
         this->user.password = password;
+        for (int i = 0; i <= nickname.size(); i++) this->nickname[i] = nickname.c_str()[i];
     }
     //
-    
     void print();
 };
 
