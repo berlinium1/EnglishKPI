@@ -62,7 +62,7 @@ class Interface{
         //write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
         write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/DAT.dat", users, user);
         for (int i = 0; i<users.size(); i++) {
-            cout<<i<<") Name: "<<users[i].user.name<<" <====> Password: "<<users[i].user.password<<endl;
+            cout<<i<<") Name: "<<users[i].nickname<<" <====> Password: "<<users[i].password<<endl;
         }
         authorize();
     }
@@ -74,8 +74,8 @@ class Interface{
         if (!userValidation(inputName, &index)) {
             cout<<"Enter your password: "; getline(cin, inputPassword);
             cout<<"\nEntered password is: "<<inputPassword<<endl;
-            if (inputPassword == users[index].user.password) {
-                cout<<"Done! Your name and password are: "<<users[index].user.name<<" === "<<users[index].user.password<<endl;
+            if (inputPassword == users[index].password) {
+                cout<<"Done! Your name and password are: "<<users[index].nickname<<" === "<<users[index].password<<endl;
                 return true;
             }
             else showaAlert("Password is wrong. Try again");
