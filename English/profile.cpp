@@ -48,8 +48,27 @@ void write_user(string path, vector<Profile>& users, Profile newProfile)
     }
     else
     {
-        fout.write((char*)&newProfile, sizeof(newProfile));
+        fout.write((char*)&newProfile, sizeof(Profile));
         users.push_back(newProfile);
+    }
+    fout.close();
+}
+
+void update_file(string path, vector<Profile>& users)
+{
+    ofstream fout;
+    fout.open(path, ios::binary);
+
+    if (!fout.is_open())
+    {
+        cout << "Unable to open the file!" << endl;
+    }
+    else
+    {
+        for (int i = 0; i < users.size(); i++)
+        {
+            fout.write((char*)&users[0], sizeof(Profile));
+        }
     }
     fout.close();
 }

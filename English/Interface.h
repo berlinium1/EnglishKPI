@@ -106,7 +106,7 @@ class Interface{
                     {
                         parser.show_material_list(user);
                         cout << "Wonna more? (y/n) Choice: "; cin >> choice;
-                        cout << "score" << user.level << endl;
+                        cout << "level = " << user.level << endl;
                     } while (choice == 'y');
                     
 
@@ -131,7 +131,6 @@ public:
         users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
 
         int index = -1;
-        Profile temp;
         while(true)
         {
             bool flag = 0;
@@ -142,7 +141,7 @@ public:
                     flag = 1;
                     break;
                 case '1':
-                    if (authorize(index)) userWorkLoop(temp);
+                    if (authorize(index)) userWorkLoop(users[index]);
                     flag = 1;
                     break;
                 default:
@@ -151,6 +150,8 @@ public:
             }
             if (flag) break;
         }
+        cout << users[0].level;
+        update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
     }
 };
 

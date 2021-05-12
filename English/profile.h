@@ -49,3 +49,4 @@ struct Profile
 
 vector<Profile> read_users(string path); // read all users at the beginning
 void write_user(string path, vector<Profile>&, Profile); // write one new user
+void update_file(string path, vector<Profile>&);
