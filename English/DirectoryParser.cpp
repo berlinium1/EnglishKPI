@@ -12,7 +12,7 @@ void DirectoryParser::parse() {
 }
 
 void DirectoryParser::show_material_list() {
-    int min = 0;
+    int min = -1;
     int max = access_level > materials.size() ? materials.size() : access_level;
     size_t num = 0;
     bool input = true;
