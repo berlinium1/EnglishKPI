@@ -12,6 +12,7 @@ struct Profile
     float score;
     int level;
     
+    //temp
     void setUserData(string nickname, string password){
         for (int i = 0; i <= nickname.size(); i++) this->nickname[i] = nickname[i];
         for (int i = 0; i <= password.size(); i++) this->password[i] = password[i];
@@ -33,7 +34,16 @@ struct Profile
             i++;
         }
     }
-
+    
+    void setScore(float score){
+        this->score += score;
+        if (score) (this->level)++;
+    }
+    
+    float getScore(){
+        return score;
+    }
+    
     void print();
 };
 
