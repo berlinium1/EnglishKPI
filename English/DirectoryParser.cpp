@@ -20,7 +20,7 @@ void DirectoryParser::show_material_list() {
 
     cout << "[-1] Exit\n" << "[" << min << "-" << max - 1 << "] Choose lesson" << endl;
     while (num < max) {
-        cout << get_lesson_number(materials[num]) << " - " << get_lesson_name(materials[num]) << endl;
+        cout << get_lesson_number(materials[num]) - 1 << " - " << get_lesson_name(materials[num]) << endl;
         num++;
     }
 
@@ -28,7 +28,7 @@ void DirectoryParser::show_material_list() {
         cout << "Choice: ";
         input = true;
         cin >> choice;
-        if (cin.fail() || get_lesson_number(choice) < -1 || get_lesson_number(choice) > max) {
+        if (cin.fail() || stoi(choice) < -1 || stoi(choice) > max) {
             input = false;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
