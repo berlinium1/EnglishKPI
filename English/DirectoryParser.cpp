@@ -19,7 +19,7 @@ void DirectoryParser::show_material_list() {
     string choice;
 
     cout << "[-1] Exit\n" << "[" << min << "-" << max - 1 << "] Choose lesson" << endl;
-    while (num < max) {
+    while (num <= max) {
         cout << get_lesson_number(materials[num]) << " - " << get_lesson_name(materials[num]) << endl;
         num++;
     }

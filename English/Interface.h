@@ -10,6 +10,7 @@
 
 #include "Header.h"
 #include "Profile.h"
+#include "DirectoryParser.h"
 
 class Interface{
     vector<Profile> users;
@@ -66,9 +67,9 @@ class Interface{
             users[i].getUserData(tempName, tempPassword);
             cout<<i<<") Name: "<<tempName<<" <====> Password: "<<tempPassword<<endl;
         }
-        userWorkLoop();
+        userWorkLoop(user);
     }
-    bool authorize(){
+    bool authorize(Profile& temp){
         string inputName;
         string inputPassword;
         int index;
@@ -87,15 +88,21 @@ class Interface{
         else showaAlert("Unfortunately, there's no user with this name");
         return false;
     }
-    void userWorkLoop(){
+    void userWorkLoop(Profile& user){
         cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\nYour choice: ";
         char choice;
         bool flag = 0;
+        
+        DirectoryParser parser(user);
         do{
             cin>>choice;
             switch (choice) {
                 case '2':
+                    // here we operate levels
                     cout<<"Levels"<<endl;
+                    
+                    parser.show_material_list();
+
                     flag = 1;
                     break;
                 case '1':
@@ -114,8 +121,10 @@ public:
     void start(){
         char ch;
         cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
-        bool isInSystem = 0;
         users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
+
+        Profile temp;
+
         while(true)
         {
             bool flag = 0;
@@ -126,8 +135,7 @@ public:
                     flag = 1;
                     break;
                 case '1':
-                    isInSystem = authorize();
-                    if (isInSystem) userWorkLoop();
+                    if (authorize(temp)) userWorkLoop(temp);
                     flag = 1;
                     break;
                 default:

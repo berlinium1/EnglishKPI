@@ -10,7 +10,7 @@ struct Profile
     char nickname[100];
     char password[100];
     float score;
-    int level;
+    int level = 0;
     
     //temp
     void setUserData(string nickname, string password){

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <filesystem>
 #include <vector>
+#include "profile.h"
 
 using namespace std;
 namespace fs = filesystem;
@@ -17,7 +18,7 @@ private:
 	string get_lesson_name(string);
 	void choose_lesson();
 public:
-	DirectoryParser(int lvl) : access_level(lvl) {
+	DirectoryParser(Profile& user) : access_level(user.level) {
 		parse();
 	}
 
