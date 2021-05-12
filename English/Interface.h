@@ -98,15 +98,12 @@ class Interface{
             cin>>choice;
             switch (choice) {
                 case '2':
-                    // here we operate levels
-                    cout<<"Levels"<<endl;
-                    
-                    
+                    cout<<"Levels"<<endl;                  
                     do
                     {
                         parser.show_material_list(user);
                         cout << "Wonna more? (y/n) Choice: "; cin >> choice;
-                        cout << "level = " << user.level << endl;
+
                     } while (choice == 'y');
                     
 
@@ -127,12 +124,13 @@ class Interface{
 public:
     void start(){
         char ch;
-        cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
+        
         users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
 
         int index = -1;
         while(true)
         {
+            cout << "Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
             bool flag = 0;
             cin>>ch;
             switch (ch) {
@@ -141,7 +139,15 @@ public:
                     flag = 1;
                     break;
                 case '1':
-                    if (authorize(index)) userWorkLoop(users[index]);
+                    if (authorize(index))
+                    {
+                        do
+                        {
+                            userWorkLoop(users[index]);
+                            cout << "Wonna exit? (y/n) Choice: "; cin >> ch;
+                        } while (ch != 'y');
+                    }
+
                     flag = 1;
                     break;
                 default:
@@ -150,7 +156,6 @@ public:
             }
             if (flag) break;
         }
-        cout << users[0].level;
         update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
     }
 };

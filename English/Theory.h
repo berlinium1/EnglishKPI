@@ -16,7 +16,7 @@ public:
     char rightAnswer;
     string task;
     bool checkAnswer(char answer);
-
+    
 public:
     Test(string task, char rightAnswer);
     bool show_test();
@@ -28,10 +28,12 @@ class Theory{
     string theory;
     vector<Test> tests;
     bool isAlreadyDone;
+    int level;
 public:
     Theory(string path);
     void show_theory();
     void show_tests(Profile &user);
+    void set_level(int choice) { level = choice; }
 };
 
 

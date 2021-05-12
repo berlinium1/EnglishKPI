@@ -42,6 +42,7 @@ void DirectoryParser::show_material_list(Profile& user) {
     }
     else {
         Theory lesson_instance(fs::current_path().string() + "\\Data\\" + materials[stoi(choice)]);
+        lesson_instance.set_level(stoi(choice));
         lesson_instance.show_theory();
         lesson_instance.show_tests(user);
     }
