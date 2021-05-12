@@ -12,8 +12,16 @@
 #include "Profile.h"
 
 class Interface{
-    vector<Profile> users = read_users(std::filesystem::current_path().string() + "\\" + "user.dat"); // read previous users
+    vector<Profile> users = read_users(std::filesystem::current_path().string() + "\\" + "user.dat");
 
+    bool userValidation(string name, int *index = nullptr){
+        for (int i = 0; i < users.size(); i++)
+        if (users[i].nickname == name){
+            if (index != nullptr) *index = i;
+            return false;
+        }
+        return true;
+    }
     void showaAlert(string alert, int exitCode = 0){
         cout<<alert<<endl;
         if (exitCode) exit(exitCode);
@@ -22,9 +30,19 @@ class Interface{
         string name;
         string password1;
         string password2;
+        bool flag = 0;
         do{
-            cout<<"Enter your name: "; getline(cin.ignore(), name);
-            cout<<"Enter you password: "; getline(cin, password1);
+            cout<<"Enter your name: ";
+            if (!flag){
+                getline(cin.ignore(), name);
+                flag = 1;
+            }
+            else getline(cin, name);
+            if (!userValidation(name)) {
+                showaAlert("This name's already existed");
+                continue;
+            }
+            cout<<"Enter your password: "; getline(cin, password1);
             cout<<"Enter it again: "; getline(cin, password2);
             if (password1 == password2){
                 cout<<"Matches\n";
@@ -51,6 +69,9 @@ public:
     void start(){
         char ch;
         cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
+        bool flag = 0;
+        bool isInSystem = 0;
+        users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/DAT.dat", flag);
         while(true){
             bool flag = 0;
             cin>>ch;
@@ -60,7 +81,8 @@ public:
                     flag = 1;
                     break;
                 case '1':
-                    // authorization
+                    authorize();
+                    flag = 1;
                     break;
                 default:
                     showaAlert("Try again\n");
