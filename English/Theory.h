@@ -8,6 +8,7 @@
 #ifndef Theory_h
 #define Theory_h
 #include "Header.h"
+#include "Profile.h"
 
 class Test{
 public:
@@ -30,7 +31,7 @@ class Theory{
 public:
     Theory(string path);
     void show_theory();
-    float show_tests(int index);
+    void show_tests(Profile &user);
 };
 
 
