@@ -26,7 +26,7 @@ class Interface{
         cout<<alert<<endl;
         if (exitCode) exit(exitCode);
     }
-    void registerUser(){
+    void registerUser(int &index){
         string name;
         string password1;
         string password2;
@@ -60,18 +60,18 @@ class Interface{
 
         //users = read_users(std::__fs::filesystem::current_path().string() + "\\" + "user.dat");
         //write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
-        write_user(std::filesystem::current_path().string() + "\\NEWDATA.dat", users, user);
+        write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/NEWDATA.dat", users, user);
         for (int i = 0; i<users.size(); i++) {
             string tempName, tempPassword;
             users[i].getUserData(tempName, tempPassword);
             cout<<i<<") Name: "<<tempName<<" <====> Password: "<<tempPassword<<endl;
         }
-        userWorkLoop();
+        index = (int)users.size()-1;
+        userMainView(index);
     }
-    bool authorize(){
+bool authorize(int &index){
         string inputName;
         string inputPassword;
-        int index;
         cout<<"Enter your name: "; getline(cin.ignore(), inputName);
         if (!userValidation(inputName, &index)) {
             cout<<"Enter your password: "; getline(cin, inputPassword);
@@ -87,7 +87,7 @@ class Interface{
         else showaAlert("Unfortunately, there's no user with this name");
         return false;
     }
-    void userWorkLoop(){
+    void userMainView(int &index){
         cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\nYour choice: ";
         char choice;
         bool flag = 0;
@@ -110,24 +110,25 @@ class Interface{
             if (flag) break;
         }while(true);
     }
+    void userLevelsView(){}
 public:
     void start(){
         char ch;
         cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
         bool isInSystem = 0;
-        users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
-        while(true)
-        {
+        int index = -1;
+        users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/NEWDATA.dat");
+        while(true){
             bool flag = 0;
             cin>>ch;
             switch (ch) {
                 case '0':
-                    registerUser();
+                    registerUser(index);
                     flag = 1;
                     break;
                 case '1':
-                    isInSystem = authorize();
-                    if (isInSystem) userWorkLoop();
+                    isInSystem = authorize(index);
+                    if (isInSystem) userMainView(index);
                     flag = 1;
                     break;
                 default:
