@@ -1,0 +1,22 @@
+%Title
+Task1. Sentense1. Sentense2. Sentense3.
+Sentense4.
+Sentense5.
+#TEST
+#1. What is(1)?
+a) one(1)
+b) two(1)
+c) three(1)
+d) four(1)
+#2. What is(2)?
+a) one(2)
+b) two(2)
+c) three(2)
+d) four(2)
+#3. What is(3)?
+a) one(3)
+b) two(3)
+c) three(3)
+d) four(3)
+#RIGHT ANSWERS:
+abc
