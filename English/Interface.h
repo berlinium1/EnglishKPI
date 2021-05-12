@@ -21,16 +21,29 @@ class Interface{
         string name;
         string password1;
         string password2;
-        //do{
-            cout<<"Enter your name: "; getline(cin, name); cin.ignore();
-            cout<<"Enter you password: "; getline(cin, password1); cin.ignore();
-            cout<<"Enter it again: "; getline(cin, password2); cin.ignore();
-            if (password1 == password2) //break;
-            showaAlert("Passwords doesn't match each other. Try again");
-        //}
-        //while(true);
-        Profile user(name, password1);
+        do{
+            cout<<"Enter your name: "; getline(cin.ignore(), name);
+            cout<<"Enter you password: "; getline(cin, password1);
+            cout<<"Enter it again: "; getline(cin, password2);
+            if (password1 == password2){
+                cout<<"Matches\n";
+                cout<<"Password1 was: "<<password1<<endl;
+                break;
+            }
+            else showaAlert("Passwords doesn't match each other. Try again");
+            cout<<"Password1 was: "<<password1<<endl;
+            cout<<"Password2 was: "<<password2<<endl;
+        }
+        while(true);
+        Profile user;
+        user.setUserData(name, password1);
+        users = read_users(std::__fs::filesystem::current_path().string() + "\\" + "user.dat");
         write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
+//MAC: users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/userDATA.dat");
+//MAC: write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/userDATA.dat", users, user);
+//        for (int i = 0; i<users.size(); i++) {
+//            cout<<i<<") Name: "<<users[i].user.name<<" <====> Password: "<<users[i].user.password<<endl;
+//        }
     }
 public:
     void start(){
