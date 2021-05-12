@@ -80,5 +80,9 @@ Theory::Theory(string path){
 }
 
 void Theory::show(){
-    cout<<theory;
+    system("cls");
+    cout << title << endl << theory << endl;
+    for (size_t i = 0; i < tests.size(); i++) {
+        tests[i].show_test();
+    }
 }

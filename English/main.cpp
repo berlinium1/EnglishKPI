@@ -8,14 +8,10 @@
 #include "Header.h"
 #include "Theory.h"
 #include "Interface.h"
+#include "DirectoryParser.h"
 
-int main(int argc, const char * argv[])
-{
-    //Test test("Task", 5, 1);
-    //test.show_test();
-    Theory theory("theory2.txt");
-    theory.show();
-    Interface app;
-    app.start();
+int main() {
+    DirectoryParser ddd(2);
+    ddd.show_material_list();
     return 0;
 }
