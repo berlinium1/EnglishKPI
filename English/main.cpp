@@ -9,7 +9,8 @@
 #include "Theory.h"
 #include "Interface.h"
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[])
+{
     //Test test("Task", 5, 1);
     //test.show_test();
     Theory theory("theory2.txt");

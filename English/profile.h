@@ -5,30 +5,36 @@
 #include <fstream>
 using namespace std;
 
-class User{
-public:
-    string name;
-    string password;
-};
-//
-
 struct Profile
-{
-    //temp
-    User user;
-    //
-    
-    char nickname[100]; // for nickname
-    float score; // points
+{    
+    char nickname[100];
+    char password[100];
+    float score;
     int level;
     
     //temp
     void setUserData(string nickname, string password){
-        this->user.name = nickname;
-        this->user.password = password;
-        for (int i = 0; i <= nickname.size(); i++) this->nickname[i] = nickname.c_str()[i];
+        for (int i = 0; i <= nickname.size(); i++) this->nickname[i] = nickname[i];
+        for (int i = 0; i <= password.size(); i++) this->password[i] = password[i];
     }
-    //
+    
+    void getUserData(string& nickname, string& password)
+    {
+        int i = 0;
+        while (this->nickname[i] != '\0')
+        {
+            nickname.push_back(this->nickname[i]);
+            i++;
+        }
+        i = 0;
+
+        while (this->password[i] != '\0')
+        {
+            password.push_back(this->password[i]);
+            i++;
+        }
+    }
+
     void print();
 };
 

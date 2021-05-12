@@ -12,7 +12,8 @@
 #include "Profile.h"
 
 class Interface{
-    vector<Profile> users;
+    vector<Profile> users = read_users(std::filesystem::current_path().string() + "\\" + "user.dat"); // read previous users
+
     void showaAlert(string alert, int exitCode = 0){
         cout<<alert<<endl;
         if (exitCode) exit(exitCode);
@@ -35,10 +36,11 @@ class Interface{
             cout<<"Password2 was: "<<password2<<endl;
         }
         while(true);
+
         Profile user;
         user.setUserData(name, password1);
-        users = read_users(std::__fs::filesystem::current_path().string() + "\\" + "user.dat");
-        write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
+        
+        write_user(std::filesystem::current_path().string() + "\\" + "user.dat", users, user);
 //MAC: users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/userDATA.dat");
 //MAC: write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/userDATA.dat", users, user);
 //        for (int i = 0; i<users.size(); i++) {
