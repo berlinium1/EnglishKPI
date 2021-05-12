@@ -10,9 +10,11 @@
 #include "Interface.h"
 #include "DirectoryParser.h"
 
-int main() {
-    DirectoryParser ddd(2);
-    ddd.show_material_list();
+int main() 
+{
+    Interface app;
+    app.start();
+
     system("pause");
     return 0;
 }

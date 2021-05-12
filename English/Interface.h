@@ -60,7 +60,7 @@ class Interface{
 
         //users = read_users(std::__fs::filesystem::current_path().string() + "\\" + "user.dat");
         //write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
-        write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/NEWDATA.dat", users, user);
+        write_user(std::filesystem::current_path().string() + "\\NEWDATA.dat", users, user);
         for (int i = 0; i<users.size(); i++) {
             string tempName, tempPassword;
             users[i].getUserData(tempName, tempPassword);
@@ -115,8 +115,9 @@ public:
         char ch;
         cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
         bool isInSystem = 0;
-        users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/NEWDATA.dat");
-        while(true){
+        users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
+        while(true)
+        {
             bool flag = 0;
             cin>>ch;
             switch (ch) {
