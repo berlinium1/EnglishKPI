@@ -18,10 +18,10 @@ void DirectoryParser::show_material_list(Profile& user) {
     size_t num = 0;
     bool input = true;
     string choice;
-
-    cout << "[-1] Exit\n" << "[" << min << "-" << max - 1 << "] Choose lesson" << endl;
+    // "[-1] Exit\n" << "[" << min << "-" << max - 1 << "]
+    cout << "Choose lesson" << endl;
     while (num <= max) {
-        cout << get_lesson_number(materials[num]) << " - " << get_lesson_name(materials[num]) << endl;
+        cout << get_lesson_number(materials[num]) - 1 << " - " << get_lesson_name(materials[num]) << endl;
         num++;
     }
 
