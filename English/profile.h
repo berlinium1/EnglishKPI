@@ -5,19 +5,34 @@
 #include <fstream>
 using namespace std;
 
+//temp
+class User{
+public:
+    string name;
+    string password;
+};
+//
+
 struct Profile
 {
-	char nickname[100]; // for nickname
-	float score; // points
-	int level;
-
-	void print()
-	{
-		cout << "nickname = " << nickname << endl;
-		cout << "score = " << score << endl;
-		cout << "level = " << level << endl;
-		cout << "======================================\n";
-	}
+    //temp
+    User user;
+    //
+    
+    char nickname[100]; // for nickname
+    float score; // points
+    int level;
+    
+    //temp
+    Profile(){}
+    Profile(string nickname, string password){
+        this->user.name = nickname;
+        for (int i = 0; i <= nickname.size(); i++) this->nickname[i] = nickname.c_str()[i];
+        this->user.password = password;
+    }
+    //
+    
+    void print();
 };
 
 vector<Profile> read_users(string path); // read all users at the beginning
