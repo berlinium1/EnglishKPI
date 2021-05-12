@@ -13,5 +13,6 @@
 int main() {
     DirectoryParser ddd(2);
     ddd.show_material_list();
+    system("pause");
     return 0;
 }

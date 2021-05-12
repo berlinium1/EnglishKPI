@@ -18,7 +18,7 @@ void DirectoryParser::show_material_list() {
     bool input = true;
     string choice;
 
-    cout << "[0] Exit\n" << "[" << min << "-" << max - 1 << "] Choose lesson" << endl;
+    cout << "[-1] Exit\n" << "[" << min << "-" << max - 1 << "] Choose lesson" << endl;
     while (num < max) {
         cout << get_lesson_number(materials[num]) << " - " << get_lesson_name(materials[num]) << endl;
         num++;
@@ -28,7 +28,7 @@ void DirectoryParser::show_material_list() {
         cout << "Choice: ";
         input = true;
         cin >> choice;
-        if (cin.fail() || get_lesson_number(choice) < min || get_lesson_number(choice) > max) {
+        if (cin.fail() || get_lesson_number(choice) < -1 || get_lesson_number(choice) > max) {
             input = false;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -36,11 +36,11 @@ void DirectoryParser::show_material_list() {
         }
     } while (!input);
 
-    if (get_lesson_number(choice) == 0) {
+    if (choice == "-1") {
         exit(1);
     }
     else {
-        Theory lesson_instance(fs::current_path().string() + "\\Data\\" + materials[get_lesson_number(choice)]);
+        Theory lesson_instance(fs::current_path().string() + "\\Data\\" + materials[stoi(choice)]);
         lesson_instance.show();
     }
 

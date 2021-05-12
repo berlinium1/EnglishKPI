@@ -26,7 +26,6 @@ bool Test::show_test(){
 
 
 Theory::Theory(string path){
-    path = std::filesystem::current_path().string() + "\\" + path;
     ifstream source(path);
     if (source.is_open()) {
         string str, task;
