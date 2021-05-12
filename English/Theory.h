@@ -26,9 +26,11 @@ class Theory{
     string title;
     string theory;
     vector<Test> tests;
+    bool isAlreadyDone;
 public:
     Theory(string path);
-    void show();
+    void show_theory();
+    float show_tests(int index);
 };
 
 
