@@ -12,7 +12,7 @@
 #include "Profile.h"
 
 class Interface{
-    vector<Profile> users = read_users(std::filesystem::current_path().string() + "\\" + "user.dat");
+    vector<Profile> users;
 
     bool userValidation(string name, int *index = nullptr){
         for (int i = 0; i < users.size(); i++)
@@ -60,11 +60,13 @@ class Interface{
 
         //users = read_users(std::__fs::filesystem::current_path().string() + "\\" + "user.dat");
         //write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
-        write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/DAT.dat", users, user);
+        write_user("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/NEWDATA.dat", users, user);
         for (int i = 0; i<users.size(); i++) {
-            cout<<i<<") Name: "<<users[i].nickname<<" <====> Password: "<<users[i].password<<endl;
+            string tempName, tempPassword;
+            users[i].getUserData(tempName, tempPassword);
+            cout<<i<<") Name: "<<tempName<<" <====> Password: "<<tempPassword<<endl;
         }
-        authorize();
+        userWorkLoop();
     }
     bool authorize(){
         string inputName;
@@ -74,8 +76,10 @@ class Interface{
         if (!userValidation(inputName, &index)) {
             cout<<"Enter your password: "; getline(cin, inputPassword);
             cout<<"\nEntered password is: "<<inputPassword<<endl;
-            if (inputPassword == users[index].password) {
-                cout<<"Done! Your name and password are: "<<users[index].nickname<<" === "<<users[index].password<<endl;
+            string tempName, tempPassword;
+            users[index].getUserData(tempName, tempPassword);
+            if (inputPassword == tempPassword) {
+                cout<<"Done! Your name and password are: "<<tempName<<" === "<<tempPassword<<endl;
                 return true;
             }
             else showaAlert("Password is wrong. Try again");
@@ -84,15 +88,18 @@ class Interface{
         return false;
     }
     void userWorkLoop(){
-        cout<<"Hey! You can go to levels for learning English or exit\nShow Levels - 1\nExit - 0\nYour choice: ";
+        cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\nYour choice: ";
         char choice;
         bool flag = 0;
         do{
             cin>>choice;
             switch (choice) {
-                case '1':
+                case '2':
                     cout<<"Levels"<<endl;
                     flag = 1;
+                    break;
+                case '1':
+                    start();
                     break;
                 case '0':
                     showaAlert("GoodBye!", 1);
@@ -108,7 +115,7 @@ public:
         char ch;
         cout<<"Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
         bool isInSystem = 0;
-        users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/DAT.dat");
+        users = read_users("/Users/yaroslav/Desktop/EnglishKPI/English/Sources/UserData/NEWDATA.dat");
         while(true){
             bool flag = 0;
             cin>>ch;
