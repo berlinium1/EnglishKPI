@@ -11,7 +11,7 @@
 #include "Header.h"
 #include "Profile.h"
 #include "DirectoryParser.h"
-
+#include <conio.h>
 class Interface{
     vector<Profile> users;
 
@@ -62,11 +62,11 @@ class Interface{
         //users = read_users(std::__fs::filesystem::current_path().string() + "\\" + "user.dat");
         //write_user(std::__fs::filesystem::current_path().string() + "\\" + "user.dat", users, user);
         write_user(std::filesystem::current_path().string() + "\\NEWDATA.dat", users, user);
-        for (int i = 0; i<users.size(); i++) {
+        /*for (int i = 0; i<users.size(); i++) {
             string tempName, tempPassword;
             users[i].getUserData(tempName, tempPassword);
             cout<<i<<") Name: "<<tempName<<" <====> Password: "<<tempPassword<<endl;
-        }
+        }*/
         system("cls");
         cout << "You entered as " << user.nickname << ". Your level: " << user.level << "." << endl << endl;
         userWorkLoop(user);
@@ -86,19 +86,29 @@ class Interface{
                 //cout << "Done! Your name and password are: " << tempName << " === " << tempPassword << endl;
                 return true;
             }
-            else showaAlert("Password is wrong. Try again");
+            else
+            {
+                showaAlert("Password is wrong. Try again");
+                _getch();
+                start();
+            }
         }
-        else showaAlert("Unfortunately, there's no user with this name");
+        else
+        {
+            showaAlert("Unfortunately, there's no user with this name");
+            _getch();
+            start();
+        }
         return false;
     }
     void userWorkLoop(Profile& user){
-        cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\nYour choice: ";
+        cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\n";
         char choice;
         bool flag = 0;
         
         DirectoryParser parser(user);
         do{
-            cin>>choice;
+            cout << "Your choice: "; cin >> choice;
             switch (choice) {
                 case '2':
                     system("cls");
@@ -121,7 +131,10 @@ class Interface{
                     showaAlert("GoodBye!", 1);
                     break;
                 default:
+                    system("cls");
                     showaAlert("Wrong choice. Try again");
+                    cout << "You entered as " << user.nickname << ". Your level: " << user.level << "." << endl << endl;
+                    userWorkLoop(user);
             }
             if (flag) break;
         }while(true);
@@ -162,7 +175,8 @@ public:
                     flag = 1;
                     break;
                 default:
-                    showaAlert("Try again\n");
+                    showaAlert("Try again");
+                    _getch();
                     break;
             }
             if (flag) break;
