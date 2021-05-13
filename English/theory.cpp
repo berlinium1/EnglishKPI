@@ -19,8 +19,9 @@ bool Test::checkAnswer(char answer){
 bool Test::show_test(){
     cout<<task<<endl;
     char ch;
-    cout << "Give the right answer: "; cin >> ch;
+    cout << "Your answer: "; cin >> ch;
     if (!checkAnswer(ch)) cout << "Incorrect!" << endl;
+    else cout << "Right!" << endl;
     return checkAnswer(ch);
 }
 
