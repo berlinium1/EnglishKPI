@@ -1,0 +1,24 @@
+%Usage of a/an
+"A" is used before words that start with consonant sounds 
+("a sample" or "a model"), even if the consonant sound is made by 
+a vowel ("a unit"). Conversely, "an" is used before words that start 
+with vowel sounds ("an equation" or "an element"), 
+even if the word starts with a silent consonant ("an hour").
+#TEST
+#1. _ boy
+a) a
+b) an
+#2. _ orange
+a) a
+b) an
+#3. _ girl
+a) a
+b) an
+#4. _elephant
+a) a
+b) an
+#5. _ apple
+a) a
+b) an
+#RIGHT ANSWERS:
+ababb
