@@ -36,7 +36,7 @@ void DirectoryParser::show_material_list(Profile& user) {
             cout << "Invalid input. Please, try again.\n";
         }
     } while (!input);
-
+    system("cls");
     if (choice == "-1") {
         exit(1);
     }

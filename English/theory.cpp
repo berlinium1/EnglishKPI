@@ -91,7 +91,9 @@ void Theory::show_tests(Profile &user){
     if (isAlreadyDone) user.setScore(score);
     else{
         isAlreadyDone = true;
-        if (user.level == level) score = 1;
+        if (user.level == level) {
+            score = 1;
+        }
         user.setScore(score);
     }
 }

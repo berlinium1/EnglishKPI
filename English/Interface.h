@@ -46,8 +46,8 @@ class Interface{
             cout<<"Enter your password: "; getline(cin, password1);
             cout<<"Enter it again: "; getline(cin, password2);
             if (password1 == password2){
-                cout<<"Matches\n";
-                cout<<"Password1 was: "<<password1<<endl;
+                //cout<<"Matches\n";
+                //cout<<"Password1 was: "<<password1<<endl;
                 break;
             }
             else showaAlert("Passwords doesn't match each other. Try again");
@@ -67,6 +67,8 @@ class Interface{
             users[i].getUserData(tempName, tempPassword);
             cout<<i<<") Name: "<<tempName<<" <====> Password: "<<tempPassword<<endl;
         }
+        system("cls");
+        cout << "You entered as " << user.nickname << ". Your level: " << user.level << "." << endl << endl;
         userWorkLoop(user);
     }
     bool authorize(int& index) {
@@ -75,12 +77,13 @@ class Interface{
         cout << "Enter your name: "; getline(cin.ignore(), inputName);
         if (!userValidation(inputName, &index)) {
             cout << "Enter your password: "; getline(cin, inputPassword);
-            cout << "\nEntered password is: " << inputPassword << endl;
+            //cout << "\nEntered password is: " << inputPassword << endl;
             string tempName, tempPassword;
-            cout << "index = "<< index;
             users[index].getUserData(tempName, tempPassword);
             if (inputPassword == tempPassword) {
-                cout << "Done! Your name and password are: " << tempName << " === " << tempPassword << endl;
+                system("cls");
+                cout << "You entered as " << tempName << ". Your level: " << users[index].level << "." <<endl << endl;
+                //cout << "Done! Your name and password are: " << tempName << " === " << tempPassword << endl;
                 return true;
             }
             else showaAlert("Password is wrong. Try again");
@@ -98,10 +101,12 @@ class Interface{
             cin>>choice;
             switch (choice) {
                 case '2':
-                    cout<<"Levels"<<endl;                  
+                    system("cls");
+                    //cout<<"Levels"<<endl;                  
                     do
                     {
                         parser.show_material_list(user);
+                        system("cls");
                         cout << "Wonna more? (y/n) Choice: "; cin >> choice;
 
                     } while (choice == 'y');
@@ -130,9 +135,11 @@ public:
         int index = -1;
         while(true)
         {
+            system("cls");
             cout << "Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
             bool flag = 0;
-            cin>>ch;
+            cout << "Choice: "; cin >> ch;
+            system("cls");
             switch (ch) {
                 case '0':
                     registerUser();
@@ -145,6 +152,10 @@ public:
                         {
                             userWorkLoop(users[index]);
                             cout << "Wonna exit? (y/n) Choice: "; cin >> ch;
+                            system("cls");
+                            if (ch != 'y') {
+                                cout << "You entered as " << users[index].nickname << ". Your level: " << users[index].level << "." << endl << endl;
+                            }
                         } while (ch != 'y');
                     }
 
