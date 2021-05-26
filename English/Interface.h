@@ -14,7 +14,7 @@
 #include <conio.h>
 class Interface{
     vector<Profile> users;
-
+    string adminCode = "1234";
     bool userValidation(string name, int* index = nullptr){
         for (int i = 0; i < users.size(); i++)
         if (users[i].nickname == name){
@@ -149,7 +149,7 @@ public:
         while(true)
         {
             system("cls");
-            cout << "Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\n";
+            cout << "Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\nEnter as administrator - 2\n";
             bool flag = 0;
             cout << "Choice: "; cin >> ch;
             system("cls");
@@ -174,6 +174,21 @@ public:
 
                     flag = 1;
                     break;
+                case '2':{
+                    string code = "";
+                    bool isAdmin = false;
+                    while (!isAdmin) {
+                        cout << "Give the ADMIN-code to enter or press 0: "; cin >> code;
+                        if (code == "0") break;
+                        if (code == adminCode) isAdmin = true;
+                    }
+                    flag = 1;
+                    if (isAdmin) {
+                        Admin admin;
+                        admin.adminInterface();
+                    }
+                    break;
+                }
                 default:
                     showaAlert("Try again");
                     _getch();
