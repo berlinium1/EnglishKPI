@@ -101,7 +101,7 @@ float Profile::getScore(){
 
 
 void Teacher::getUserProfile(int index){
-    cout << "\n=== Profile № "<<index<<" ===\n";
+    cout << "\n=== Profile ["<<index<<"] ===\n";
     users[index].print();
 }
 void Teacher::seeAllProfiles(){
@@ -111,7 +111,7 @@ void Teacher::seeAllProfiles(){
         cout << "User[" << i + 1 << "] " << users[i].nickname << endl;
     }
     do {
-        cout << "Choose one to show(№ in list): "; cin >> choice;
+        cout << "Choose one to show(number in list): "; cin >> choice;
         if (choice >= 1 && choice <= users.size()) {
             getUserProfile(choice-1);
         }
@@ -122,13 +122,15 @@ void Teacher::seeAllProfiles(){
 
 // в поле аргументов можно убрать путь, т.к. мы всё равно с стд::филэсустем
 void Teacher::createLesson(string path){
-    bool flag = 0;
     vector<char> rightAnswers;
     string title, paragraph, task, variant;
-    int numberOfExercises, numberOfVariants;
+    int numberOfExercises, numberOfVariants, level;
     char variants[] = {'a', 'b', 'c', 'd', 'e', 'f'};
     cout << "\nHey! Welcome to The Lesson Master\nEnter a title: \n"; getline(cin, title);
-    ofstream newLesson(path + "/" + title + ".txt"); // тут путь можно поменять(я для теста оставил)
+    cout << "\nFor what level this lesson will be?: \n"; cin >> level;
+    
+    ofstream newLesson(path + "/[" + to_string(level) + "]" + title + ".txt"); // тут путь можно поменять(я для теста оставил)
+    
     newLesson << "%" << title << endl;
     cout << "\nWell! Let's fill the main part. Write in the paragraph, then press \"Enter\" to write another paragraph.\nP.S. if you want to leave The Lesson Master, you must enter the 'stop'\n";
     do {
