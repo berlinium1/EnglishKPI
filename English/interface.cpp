@@ -1,6 +1,6 @@
 #include "Interface.h"
 
-bool Interface::userValidation(string name, int* index = nullptr){
+bool Interface::userValidation(string name, int* index){
     for (int i = 0; i < users.size(); i++)
     if (users[i].nickname == name){
         if (index != nullptr) *index = i;
@@ -9,9 +9,10 @@ bool Interface::userValidation(string name, int* index = nullptr){
     return true;
 }
 
-void Interface::showaAlert(string alert, int exitCode = 0){
+void Interface::showaAlert(string alert, int exitCode){
     cout<<alert<<endl;
-    if (exitCode) exit(exitCode);
+    update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
+    if (exitCode) exit(exitCode);    
 }
 void Interface::registerUser(){
     string name;
@@ -127,17 +128,16 @@ void Interface::userWorkLoop(Profile& user){
         if (flag) break;
     }while(true);
 }
-public:
 
 
 
-void Interface::start(){
+void Interface::start() {
     char ch;
-    
+
     users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
 
     int index = -1;
-    while(true)
+    while (true)
     {
         system("cls");
         cout << "Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\nEnter as teacheristrator - 2\n";
@@ -145,48 +145,47 @@ void Interface::start(){
         cout << "Choice: "; cin >> ch;
         system("cls");
         switch (ch) {
-            case '0':
-                registerUser();
-                flag = 1;
-                break;
-            case '1':
-                if (authorize(index))
+        case '0':
+            registerUser();
+            flag = 1;
+            break;
+        case '1':
+            if (authorize(index))
+            {
+                do
                 {
-                    do
-                    {
-                        userWorkLoop(users[index]);
-                        cout << "Wonna exit? (y/n) Choice: "; cin >> ch;
-                        system("cls");
-                        if (ch != 'y') {
-                            cout << "You entered as " << users[index].nickname << ". Your level: " << users[index].level << "." << endl << endl;
-                        }
-                    } while (ch != 'y');
-                }
-
-                flag = 1;
-                break;
-            case '2':{
-                string code = "";
-                bool isTeacher = false;
-                while (!isTeacher) {
-                    cout << "Give the ADMIN-code to enter or press 0: "; cin >> code;
-                    if (code == "0") break;
-                    if (code == teacherCode) isTeacher = true;
-                }
-                flag = 1;
-                if (isTeacher) {
-                    Teacher teacher;
-                    teacher.teacherInterface();
-                }
-                break;
+                    userWorkLoop(users[index]);
+                    cout << "Wonna exit? (y/n) Choice: "; cin >> ch;
+                    system("cls");
+                    if (ch != 'y') {
+                        cout << "You entered as " << users[index].nickname << ". Your level: " << users[index].level << "." << endl << endl;
+                    }
+                } while (ch != 'y');
             }
-            default:
-                showaAlert("Try again");
-                _getch();
-                break;
+
+            flag = 1;
+            break;
+        case '2': {
+            string code = "";
+            bool isTeacher = false;
+            while (!isTeacher) {
+                cout << "Give the ADMIN-code to enter or press 0: "; cin >> code;
+                if (code == "0") break;
+                if (code == teacherCode) isTeacher = true;
+            }
+            flag = 1;
+            if (isTeacher) {
+                Teacher teacher;
+                teacher.teacherInterface();
+            }
+            break;
+        }
+        default:
+            showaAlert("Try again");
+            _getch();
+            break;
         }
         if (flag) break;
     }
     update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
-}
 };

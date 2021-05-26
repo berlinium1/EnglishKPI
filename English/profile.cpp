@@ -1,4 +1,5 @@
 #include "Profile.h"
+#include <filesystem>
 
 void Profile::print()
 {
@@ -163,7 +164,7 @@ void Teacher::createLesson(string path){
 
 
 Teacher::Teacher(){
-    users = read_users(std::__fs::filesystem::current_path().string() + "\\NEWDATA.dat");
+    users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
 }
 
 void Teacher::teacherInterface(){

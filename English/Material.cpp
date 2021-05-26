@@ -1,4 +1,7 @@
 #include "Material.h"
+#include "profile.h"
+#include <filesystem>
+extern vector<Profile> users;
 
 void Material::show_material()
 {
@@ -25,6 +28,7 @@ void Material::show_material()
     } while (!input);
 
     if (choice == 0) {
+        update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
         exit(0);
     }
     else {

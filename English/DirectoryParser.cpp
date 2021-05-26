@@ -1,5 +1,6 @@
 #include "DirectoryParser.h"
 #include "Theory.h"
+extern vector<Profile> users;
 
 void DirectoryParser::parse() {
     string path = fs::current_path().string() + "\\Data",
@@ -38,6 +39,7 @@ void DirectoryParser::show_material_list(Profile& user) {
     } while (!input);
     system("cls");
     if (choice == "-1") {
+        update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
         exit(1);
     }
     else {

@@ -19,6 +19,7 @@ private:
 	void choose_lesson();
 public:
 	DirectoryParser(Profile& user) : access_level(user.level) {
+
 		parse();
 	}
 

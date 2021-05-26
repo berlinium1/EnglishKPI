@@ -10,6 +10,7 @@
 #include "Interface.h"
 #include "DirectoryParser.h"
 
+vector<Profile> users;
 int main() 
 
 {
