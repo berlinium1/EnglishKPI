@@ -13,6 +13,7 @@ void Interface::showaAlert(string alert, int exitCode = 0){
     cout<<alert<<endl;
     if (exitCode) exit(exitCode);
 }
+
 void Interface::registerUser(){
     string name;
     string password1;
@@ -92,7 +93,7 @@ bool Interface::authorize(int& index) {
 void Interface::userWorkLoop(Profile& user){
     cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\n";
     char choice;
-    bool flag = 0;
+    bool flag = 1;
     
     DirectoryParser parser(user);
     do{
@@ -116,7 +117,8 @@ void Interface::userWorkLoop(Profile& user){
                 start();
                 break;
             case '0':
-                showaAlert("GoodBye!", 1);
+                cout << "GoodBye!" << endl;
+                flag = 0;
                 break;
             default:
                 system("cls");
@@ -124,12 +126,9 @@ void Interface::userWorkLoop(Profile& user){
                 cout << "You entered as " << user.nickname << ". Your level: " << user.level << "." << endl << endl;
                 userWorkLoop(user);
         }
-        if (flag) break;
+        if (flag == 0) break;
     }while(true);
 }
-public:
-
-
 
 void Interface::start(){
     char ch;
@@ -140,14 +139,13 @@ void Interface::start(){
     while(true)
     {
         system("cls");
-        cout << "Hello! Already have an account or want to register?\nRegister - 0\nAuthorize - 1\nEnter as teacheristrator - 2\n";
+        cout << "Hello! Already have an account or want to register?\nExit - 0\nAuthorize - 1\nEnter as a teacher - 2\nRegister - 3\n";
         bool flag = 0;
         cout << "Choice: "; cin >> ch;
         system("cls");
         switch (ch) {
             case '0':
-                registerUser();
-                flag = 1;
+                flag = 0;
                 break;
             case '1':
                 if (authorize(index))
@@ -169,7 +167,7 @@ void Interface::start(){
                 string code = "";
                 bool isTeacher = false;
                 while (!isTeacher) {
-                    cout << "Give the ADMIN-code to enter or press 0: "; cin >> code;
+                    cout << "Give the TEACHER-code to enter or press 0: "; cin >> code;
                     if (code == "0") break;
                     if (code == teacherCode) isTeacher = true;
                 }
@@ -180,13 +178,17 @@ void Interface::start(){
                 }
                 break;
             }
+            case '3':
+                registerUser();
+                flag = 1;
+                break;
             default:
                 showaAlert("Try again");
                 _getch();
                 break;
         }
-        if (flag) break;
+        if (flag == 0) break;
     }
-    update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
+    update_file(filesystem::current_path().string() + "\\NEWDATA.dat", users);
 }
-};
+
