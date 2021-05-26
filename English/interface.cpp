@@ -11,8 +11,11 @@ bool Interface::userValidation(string name, int* index){
 
 void Interface::showaAlert(string alert, int exitCode){
     cout<<alert<<endl;
-    update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
-    if (exitCode) exit(exitCode);    
+    
+    if (exitCode) {
+        update_file(std::filesystem::current_path().string() + "\\NEWDATA.dat", users);
+        exit(exitCode);      
+    }
 }
 void Interface::registerUser(){
     string name;

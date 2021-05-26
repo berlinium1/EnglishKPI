@@ -181,7 +181,7 @@ void Teacher::teacherInterface(){
                 do {
                     createLesson(path); // с путём нужно разобраться
                     cout << "\nDo you want to add another one lesson?\nNo - 0\nYes - 1\nYour choice: "; cin >> ch;
-                } while (ch = '1');
+                } while (ch == '1');
             }
             default:
                 break;
