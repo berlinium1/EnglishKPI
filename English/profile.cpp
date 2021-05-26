@@ -61,7 +61,7 @@ void update_file(string path, vector<Profile>& users)
     {
         for (int i = 0; i < users.size(); i++)
         {
-            fout.write((char*)&users[0], sizeof(Profile));
+            fout.write((char*)&users[i], sizeof(Profile));
         }
     }
     fout.close();

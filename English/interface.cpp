@@ -59,7 +59,7 @@ void Interface::registerUser(){
     }*/
     system("cls");
     cout << "You entered as " << user.nickname << ". Your level: " << user.level << "." << endl << endl;
-    userWorkLoop(user);
+    userWorkLoop(users[users.size()-1]);
 }
 
 bool Interface::authorize(int& index) {
@@ -97,7 +97,7 @@ void Interface::userWorkLoop(Profile& user){
     cout<<"Hey! You can go to levels for learning English, sign out or exit\nShow Levels - 2\nSign Out - 1\nExit - 0\n";
     char choice;
     bool flag = 0;
-    
+
     DirectoryParser parser(user);
     do{
         cout << "Your choice: "; cin >> choice;
