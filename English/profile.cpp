@@ -127,7 +127,9 @@ void Teacher::createLesson(string path){
     string title, paragraph, task, variant;
     int numberOfExercises, numberOfVariants, level;
     char variants[] = {'a', 'b', 'c', 'd', 'e', 'f'};
-    cout << "\nHey! Welcome to The Lesson Master\nEnter a title: \n"; getline(cin, title);
+    cout << "\nHey! Welcome to The Lesson Master\nEnter a title: \n"; 
+    cin.ignore();
+    getline(cin, title);
     cout << "\nFor what level this lesson will be?: \n"; cin >> level;
     
     ofstream newLesson(path + "/[" + to_string(level) + "]" + title + ".txt"); // тут путь можно поменять(я для теста оставил)
@@ -164,7 +166,7 @@ void Teacher::createLesson(string path){
 
 
 Teacher::Teacher(){
-    users = read_users(std::filesystem::current_path().string() + "\\NEWDATA.dat");
+    users = read_users(filesystem::current_path().string() + "\\NEWDATA.dat");
 }
 
 void Teacher::teacherInterface(){
@@ -177,7 +179,8 @@ void Teacher::teacherInterface(){
                 else seeAllProfiles();
                 break;
             case '2':{
-                string path; char ch;
+                string path = filesystem::current_path().string() + "\\Data\\";
+                char ch;
                 do {
                     createLesson(path); // с путём нужно разобраться
                     cout << "\nDo you want to add another one lesson?\nNo - 0\nYes - 1\nYour choice: "; cin >> ch;

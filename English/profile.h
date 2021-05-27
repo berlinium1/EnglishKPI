@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <filesystem>
+
 using namespace std;
 
 class Profile
@@ -10,7 +12,7 @@ class Profile
 public:
     char nickname[100];
     char password[100];
-    float score;
+    float score = 0;
     int level = 0;
     
     //temp

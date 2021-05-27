@@ -9,8 +9,8 @@
 class Interface{
     vector<Profile> users;
     string teacherCode = "1234";
-    bool userValidation(string name, int* index = nullptr);
-    void showaAlert(string alert, int exitCode = 0);
+    bool userValidation(string, int* index = 0);
+    void showaAlert(string, int code = 0);
     void registerUser();
     bool authorize(int& index);
     void userWorkLoop(Profile& user);
